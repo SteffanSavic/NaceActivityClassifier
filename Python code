@@ -1,0 +1,29 @@
+import pandas as pd
+
+from sklearn.feature_extraction.text import CountVectorizer
+
+from sklearn.linear_model import LogisticRegression
+
+
+data = pd.read_excel(r'C:\Users\vip3r\Desktop\ML\DelatExcelSamoPotrebno.xlsx')
+
+df = pd.DataFrame(data, columns= ['Delatnost','Anketar'])
+
+df.fillna('',inplace=True)
+
+
+
+vectorizer = CountVectorizer()
+
+vectorizer.fit(df['Anketar'])
+
+#clf= LogisticRegression(solver='lbfgs')
+
+clf= LogisticRegression()
+
+
+
+training = vectorizer.transform(df['Anketar'])
+
+
+clf.fit(training, df['Delatnost'])
